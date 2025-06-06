@@ -12,6 +12,13 @@ slideshow software. It aims to introduce clarity, portability and efficiency.
 
 Anyone can use Montrer as long as you can write a text file.
 
+NOTICE
+======
+
+Until further releases, please add an extra newline at the end of the file to
+ensure the last line is read completely. This is caused by the two-pointer
+logic I used to parse the file.
+
 Usage
 =====
 
