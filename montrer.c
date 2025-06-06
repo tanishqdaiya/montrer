@@ -11,11 +11,11 @@ static void
 usage (const char *progname)
 {
   fprintf (stderr,
-	   "Usage: %s INPUT OUTPUT\n"	
-	   "Read from INPUT file and write the result to OUTPUT directory.\n\n"
-	   "Both INPUT and OUTPUT are required positional arguments.\n"
+	   "Usage: %s INPUT\n"	
+	   "Read from INPUT file and write the result to the program directory.\n\n"
+	   "INPUT is a required positional argument.\n"
 	   "Example:\n"
-	   "  %s ./input.txt .\n",
+	   "  %s ./input.txt\n",
 	   progname, progname);
 
   exit (EXIT_FAILURE);
