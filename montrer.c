@@ -40,7 +40,6 @@ line_only_contains (char line[], char c)
 static char *
 trim (char *str)
 {
-  int i = 0;
   while (*str == ' ' || *str == '\t' || *str == '\n')
     ++str;
 
