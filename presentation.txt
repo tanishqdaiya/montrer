@@ -1,16 +1,61 @@
 SLIDE1
 ======
 
-Represents the first slide.
-You can create bullet points easily
+This is the first slide.
+You can add simple lines of text.
+Multiple lines work just fine.
 
 SLIDE2
 ======
 
-Next slide is as easy
+Next slide follows easily.
 
-Subheading can also be provided
+You can add subheadings
+like this one here
 -----
 
-This is also followed by
-you guessed it
+And then add more text below.
+
+SLIDE3
+======
+
+Bullet points can be written
+as separate lines,
+one after another.
+
+SLIDE4
+======
+
+Another slide to show format.
+
+Just add your content here.
+Use blank lines to separate ideas.
+
+SLIDE5
+======
+
+You can also use short paragraphs.
+
+Each paragraph is separated by a blank line.
+
+Like this.
+
+SLIDE6
+======
+
+Slides can be as long as you want.
+
+Or keep them short and simple.
+
+Your choice!
+
+SLIDE7
+======
+
+Final slide here.
+
+Thanks for watching.
+====================
+
+That’s it for the demo.
+
