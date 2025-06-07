@@ -88,18 +88,19 @@ main (int argc, char **argv)
   FILE *out_fp = NULL;
   int slide = 0;
   while (fgets (curr_line, MAX_LINE_SIZE, in_fp) != NULL)
-    {
+    { 
       if (line_only_contains (curr_line, '='))
 	{
-	  printf ("h1:%s", prev_line);
-
 	  if (out_fp)
 	    {
 	      fprintf (out_fp, "</main>\n"
+		       "<script src=\"./script.js\"></script>\n"
 		       "</body>\n"
 		       "</html>");
 	      fclose (out_fp);
 	    }
+	  
+	  printf ("h1:%s", prev_line);
 	  /* @Implement File path management functions someday */
 #if 0
 	    if (strlen(out_dir) + strlen() + 1 > MAX_LINE_SIZE)
@@ -139,9 +140,9 @@ main (int argc, char **argv)
 		   "<header>\n"
 		   "<nav id=\"controls\">\n"
 		   "<ul>\n"
-		   "<li><a href=\"Slide_%d.html\">Prev</a></li>\n"
+		   "<li><a id=\"prev\" href=\"Slide_%d.html\">Prev</a></li>\n"
 		   "<li><a aria-current=\"page\" href=\"#\">[%d] %s</a></li>\n"
-		   "<li><a href=\"Slide_%d.html\">Next</a></li>\n"
+		   "<li><a id=\"next\" href=\"Slide_%d.html\">Next</a></li>\n"
 		   "</ul>\n"
 		   "</nav>\n"
 		   "</header>\n"
@@ -168,6 +169,15 @@ main (int argc, char **argv)
 
       strcpy (prev_line, curr_line);
       line++;
+    }
+
+  if (out_fp != NULL)
+    {
+      fprintf (out_fp, "</main>\n"
+	       "<script src=\"./script.js\"></script>\n"
+	       "</body>\n"
+	       "</html>");
+      fclose (out_fp);
     }
   
   return 0;
