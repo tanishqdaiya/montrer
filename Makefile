@@ -1,7 +1,8 @@
 CC      := gcc
 CFLAGS  := -Wall -Wextra -O2 -std=c17
+
 TARGET  := montrer
-SRCS    := args.c io.c montrer.c str.c
+SRCS    := $(wildcard src/*.c)
 OBJS    := $(SRCS:.c=.o)
 
 .PHONY: all clean montrer
