@@ -11,132 +11,17 @@
 
    See <https://www.gnu.org/licenses/> for details. */
 
-#include <ctype.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "args.h"
+#include "io.h"
+#include "str.h"
+
 #define MAX_LINE_SIZE 1024
 #define MAX_FILENAME 64
-
-/* Provided the program name, this function prints the help message describing
-   the usage of the program */
-static void
-usage (const char *progname)
-{
-  fprintf (stderr,
-           "Usage: %s INPUT\n"
-           "Read from INPUT file and write the result to the program directory.\n\n"
-           "INPUT is a required positional argument.\n"
-           "Example:\n"
-           "  %s ./input.txt\n",
-           progname, progname);
-
-  exit (EXIT_FAILURE);
-}
-
-/* Checks if the provided line contains only the given character c (unichar) */
-static bool
-is_unichar (char line[], char c)
-{
-  int i = 0;
-  while (line[i] != '\n' && line[i] != '\0')
-    if (line[i++] != c)
-      return false;
-
-  if (i < 1)
-    return false;
-
-  return true;
-}
-
-/* Trims a whitespaces, tabs and newlines from the start and end of a string
-   without allocating additional memory */
-static char *
-trim (char *str)
-{
-  while (*str == ' ' || *str == '\t' || *str == '\n')
-    ++str;
-
-  if (*str == '\0')
-    return str;
-
-  char *end = (str + strlen (str)) - 1;
-  while (end > str && (*end == ' ' || *end == '\t' || *end == '\n'))
-    --end;
-
-  *(end + 1) = '\0';
-
-  return str;
-}
-
-static FILE *
-open_file (const char *path, const char *mode)
-{
-  FILE *fp = fopen (path, mode);
-  if (fp == NULL)
-    {
-      fprintf (stderr, "fopen(%s): %s\n", path, strerror(errno));
-      exit (EXIT_FAILURE);
-    }
-
-  return fp;
-}
-
-struct montrer_args { const char *in_filepath; };
-
-static struct montrer_args
-parse_args (int argc, char **argv)
-{
-  struct montrer_args args = { 0 };
-  args.in_filepath = argv[1];
-  
-  if (argc < 2 || args.in_filepath == NULL)
-    usage (argv[0]);
-
-  return args;
-}
-
-/* Writes the header template for each Slide_#.html to a given file */
-/* @Implement HTML template engine rather than this */
-static void
-write_slide_header (FILE *out_file, const char *slide_name, uint8_t slide_no)
-{
-  fprintf (out_file, "<!DOCTYPE html>\n"
-	   "<html lang=\"en\">\n"
-	   "<head>\n"
-	   "<meta charset=\"UTF-8\" />\n"
-	   "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n"
-	   "<title>Montrer</title>\n"
-	   "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" />\n"
-	   "<link rel=\"icon\" href=\"favicon.png\" />\n"
-	   "</head>\n"
-	   "<body>\n"
-	   "<header>\n"
-	   "<nav id=\"controls\">\n"
-	   "<ul>\n"
-	   "<li><a id=\"prev\" href=\"Slide_%d.html\">Prev</a></li>\n"
-	   "<li><a aria-current=\"page\" href=\"#\">[%d] %s</a></li>\n"
-	   "<li><a id=\"next\" href=\"Slide_%d.html\">Next</a></li>\n"
-	   "</ul>\n"
-	   "</nav>\n"
-	   "</header>\n"
-	   "<main>\n", slide_no - 1, slide_no, slide_name, slide_no + 1);
- }
-
-/* Writes the footer template for each Slide_#.html and closes the given file */
-static void
-write_slide_footer (FILE *out_file)
-{
-  fprintf (out_file, "</main>\n"
-	   "<script src=\"./script.js\"></script>\n"
-	   "</body>\n"
-	   "</html>");
-  fclose (out_file);
-}
 
 int
 main (int argc, char **argv)
