@@ -27,9 +27,9 @@ make
 
 Test out the program by either using `presentation.txt` or write your own
 presentation in the correct format. Pass the file name into the program:
-`montrer presentation.txt`
+`./montrer presentation.txt`
 
-Open the generated Slide_1.html in a browser of your preference.
+Open the generated slide-001.html in a browser of your preference.
 
 Please note that the parser will parse any file. I generally use a .txt extension
 until further plans are made.
@@ -43,6 +43,10 @@ we use:
 - Each slide and its heading is followed by a line containing ONLY '=' signs.
 - Each sub-heading is followed by a line containing ONLY '-' signs.
 - Each newline is assumed to be a list item (bound to change in future revisions)
+
+
+For text formatting, codeblocks and tables, I recommend writing <i>raw HTML</i>
+inside the file itself. This might change in the future.
 
 Setext much?
 ------------
@@ -63,6 +67,6 @@ adhere to the terms in the LICENSE
 [x] Simple parsing into HTML
 [ ] Custom template engine to parse directly into a premade template file
 [ ] Custom parser to parse into an abstract tree to then generate the
-    required files.
-[ ] List and Text differentiation
+    required files
+[x] List and Text differentiation
 [ ] Videos and Image support
